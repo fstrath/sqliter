@@ -6,7 +6,7 @@
 #' directQuery(database = 'database_name', query = 'SELECT * FROM table')
 
 #' @export
-directQuery <- function(database, query){
+directQuery <- function(database, query, sqlitePath){
   db <- DBI::dbConnect(RSQLite::SQLite(), gettextf('%s/%s', sqlitePath, database))
   dat <- DBI::dbGetQuery(db, query)
   DBI::dbDisconnect(db)
@@ -14,7 +14,7 @@ directQuery <- function(database, query){
 }
 
 #' @export
-directStatement <- function(database, query){
+directStatement <- function(database, query, sqlitePath){
   db <- DBI::dbConnect(RSQLite::SQLite(), gettextf('%s/%s', sqlitePath, database))
   dat <- DBI::dbExecute(db, query)
   DBI::dbDisconnect(db)
@@ -22,7 +22,7 @@ directStatement <- function(database, query){
 }
 
 #' @export
-getMax <- function(database, table, col){
+getMax <- function(database, table, col, sqlitePath){
   db <- DBI::dbConnect(RSQLite::SQLite(), gettextf('%s/%s', sqlitePath, database))
   query <- sprintf("SELECT MAX (%s) FROM %s", col, table)
   dat <- DBI::dbGetQuery(db, query)
@@ -31,7 +31,7 @@ getMax <- function(database, table, col){
 }
 
 #' @export
-getMin <- function(database, table, col){
+getMin <- function(database, table, col, sqlitePath){
   db <- DBI::dbConnect(RSQLite::SQLite(), gettextf('%s/%s', sqlitePath, database))
   query <- sprintf("SELECT MIN (%s) FROM %s", col, table)
   dat <- DBI::dbGetQuery(db, query)
@@ -40,7 +40,7 @@ getMin <- function(database, table, col){
 }
 
 #' @export
-getTables <- function(database){
+getTables <- function(database, sqlitePath){
   db <- DBI::dbConnect(RSQLite::SQLite(), gettextf('%s/%s', sqlitePath, database))
   list_of_tables <- DBI::dbListTables(db)
   DBI::dbDisconnect(db)
@@ -48,7 +48,7 @@ getTables <- function(database){
 }
 
 #' @export
-getNames <- function(database, tables, match_what){
+getNames <- function(database, tables, match_what, sqlitePath){
   db <- DBI::dbConnect(RSQLite::SQLite(), gettextf('%s/%s', sqlitePath, database))
   d <- list()
   for(i in tables){
@@ -63,7 +63,7 @@ getNames <- function(database, tables, match_what){
 }
 
 #' @export
-getDistinct <- function(database, table, col){
+getDistinct <- function(database, table, col, sqlitePath){
   db <- DBI::dbConnect(RSQLite::SQLite(), gettextf('%s/%s', sqlitePath, database))
   query <- sprintf("SELECT DISTINCT %s FROM %s", col, table)
   dat <- DBI::dbGetQuery(db, query)
@@ -73,7 +73,7 @@ getDistinct <- function(database, table, col){
 
 ## load unique data from existing table columns and retrun in separate lists
 #' @export
-loadDataSub <- function(database, table, cols){
+loadDataSub <- function(database, table, cols, sqlitePath){
   db <- DBI::dbConnect(RSQLite::SQLite(), gettextf('%s/%s', sqlitePath, database))
   d <- list()
   for(i in cols){
@@ -87,7 +87,7 @@ loadDataSub <- function(database, table, cols){
 }
 
 #' @export
-loadDataSubset <- function(database, table, col_return, col_filter, match){
+loadDataSubset <- function(database, table, col_return, col_filter, match, sqlitePath){
   db <- DBI::dbConnect(RSQLite::SQLite(), gettextf('%s/%s', sqlitePath, database))
   if(any(match == '*')){
     matchType <- "GLOB"
@@ -105,7 +105,7 @@ loadDataSubset <- function(database, table, col_return, col_filter, match){
 }
 
 #' @export
-loadDataSubsetAll <- function(database, table, col_filter, match){
+loadDataSubsetAll <- function(database, table, col_filter, match, sqlitePath){
   db <- DBI::dbConnect(RSQLite::SQLite(), gettextf('%s/%s', sqlitePath, database))
   if(any(match == '*')){
     matchType <- "GLOB"
@@ -123,7 +123,7 @@ loadDataSubsetAll <- function(database, table, col_filter, match){
 }
 
 #' @export
-loadDateRange <- function(database, table, datecol, start, end, compound){
+loadDateRange <- function(database, table, datecol, start, end, compound, sqlitePath){
   db <- DBI::dbConnect(RSQLite::SQLite(), gettextf('%s/%s', sqlitePath, database))
   ## pick the match type for multiples or singles
   if(any(compound == '*')){
@@ -142,7 +142,7 @@ loadDateRange <- function(database, table, datecol, start, end, compound){
 }
 
 #' @export
-loadTypes <- function(database, table, match1, match2, match3, match4){
+loadTypes <- function(database, table, match1, match2, match3, match4, sqlitePath){
   db <- DBI::dbConnect(RSQLite::SQLite(), gettextf('%s/%s', sqlitePath, database))
   query <- sprintf("SELECT Component_Name, Type, Subtype_1, Subtype_2, Subtype_3 FROM %s", table)
   print(query)
