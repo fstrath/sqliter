@@ -1,6 +1,6 @@
 Package: sqliter
 Title: Helper functions to read and write data to sqlite databases for shiny apps. 
-Version: 0.0.0.9000
+Version: 0.0.0.9001
 Authors@R: 
     person(given = "Frederick",
            family = "Strathmann",
