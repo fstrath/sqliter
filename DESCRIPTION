@@ -1,13 +1,17 @@
 Package: sqliter
-Title: What the Package Does (One Line, Title Case)
+Title: Helper functions to read and write data to sqlite databases for shiny apps. 
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Frederick",
+           family = "Strathmann",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = structure("YOUR-ORCID-ID", .Names = "ORCID"))
-Description: What the package does (one paragraph).
-License: What license it uses
+           email = "fstrathmann@gmail.com")
+URL: https://fstrathmann.com           
+Description: A collection of functions written to make interacting with sqlite databases easier in R. 
+    Sqlite is a nice database for shiny apps and these functions make interacting with a database easier.
+Imports: 
+    RSQLite (>= 2.1.1)
+License: CC0
 Encoding: UTF-8
 LazyData: true
+RoxygenNote: 6.1.1
