@@ -79,8 +79,9 @@ directQuery <- function(database, query, path){
 
 ## send a static query
 #' @export
-directSendQuery <- function(database, query, path){
+directSendStatement <- function(database, query, path){
   db <- DBI::dbConnect(RSQLite::SQLite(), gettextf('%s/%s', sqlitePath, database))
-  dat <- DBI::dbSendQuery(db, query)
+  dat <- DBI::dbSendStatement(db, query)
   DBI::dbDisconnect(db)
 }
+
