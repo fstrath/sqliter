@@ -67,3 +67,20 @@ changeTargets <- function(database, table, avg, ul, ll, mr_ul, loc, start, end, 
   }
   DBI::dbDisconnect(db)
 }
+
+## fetch a static query
+#' @export
+directQuery <- function(database, query){
+  db <- DBI::dbConnect(RSQLite::SQLite(), gettextf('%s/%s', sqlitePath, database))
+  dat <- DBI::dbGetQuery(db, query)
+  DBI::dbDisconnect(db)
+  return(dat)
+}
+
+## send a static query
+#' @export
+directSendQuery <- function(database, query){
+  db <- DBI::dbConnect(RSQLite::SQLite(), gettextf('%s/%s', sqlitePath, database))
+  dat <- DBI::dbSendQuery(db, query)
+  DBI::dbDisconnect(db)
+}
