@@ -1,4 +1,4 @@
-Package: sqliter
+Package: sqlitermann
 Title: Helper functions to read and write data to sqlite databases for shiny apps. 
 Version: 0.0.0.9002
 Authors@R: 
