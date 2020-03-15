@@ -4,7 +4,7 @@
 \alias{directQuery}
 \title{Direct query to database}
 \usage{
-directQuery(database, query)
+directQuery(database, query, path)
 }
 \arguments{
 \item{database}{name of the database as a string}
